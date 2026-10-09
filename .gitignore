@@ -1,0 +1,55 @@
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Python virtual environments & caches
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# AWS & Security keys (CRITICAL)
+.aws/
+credentials
+*.pem
+*.key
+*.pfx
+.env
+secret.json
+
+# AWS CLI & SDK
+*.aws
+aws-exports.js
+
+# Terraform state
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# CloudFormation / SAM
+.aws-sam/
+samconfig.toml
+
+# Logs that may contain sensitive data
+*.log
+logs/
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Environment files
+.env.*
+!.env.example
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+
+# OS junk
+.DS_Store
