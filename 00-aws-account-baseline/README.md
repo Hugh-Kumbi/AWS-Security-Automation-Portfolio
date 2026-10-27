@@ -6,7 +6,7 @@ Before deploying any cloud resources, an enterprise-grade landing zone must be e
 
 This sandbox serves as the secure, authenticated environment for all subsequent DevSecOps and automation workloads within this repository.
 
-**Target Role:** Cloud Security Engineer / DevSecOps Engineer
+**Target Role:** Cloud Security Engineer / DevSecOps Engineer  
 **Certification Track:** AWS Certified Security – Specialty (in progress)
 
 ---
