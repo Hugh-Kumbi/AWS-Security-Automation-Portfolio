@@ -35,7 +35,7 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 | Cost Anomaly Detection           | ✅ Active monitor + email subscription            | [Cost Anomaly Detection monitor](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/03-cost-anomaly-detection.png)  |
 | CloudWatch Billing Metrics       | ✅ Enabled                                        | [Billing preferences](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/04-billing-preferences.png)     |
 | Current Monthly Bill at Baseline | ✅ $0.00 USD                                      | [Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)  |
-| Support Plan                     | ✅ Basic (Free)                                   | [Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)            |
+| Support Plan                     | ✅ Basic (Free)                                   | [Support plan](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)                                              |
 
 ---
 
