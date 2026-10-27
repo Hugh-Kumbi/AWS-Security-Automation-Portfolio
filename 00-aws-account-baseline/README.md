@@ -56,7 +56,7 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 > **Baseline billing dashboard ($0.00 USD at project start):**
 ![Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)
 
-> **Support plan (Basic *Free* confirmed):**
+> **Support plan (Basic *Free* confirmed):**  
 [!Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)
 
 ---
