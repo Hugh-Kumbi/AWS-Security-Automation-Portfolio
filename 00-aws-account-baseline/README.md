@@ -42,22 +42,22 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 ## Visual Verification
 
 > **Root MFA enabled (IAM Dashboard green checkmark):**
-> ![Root MFA enabled](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/01-root-mfa-enabled.png)
+![Root MFA enabled](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/01-root-mfa-enabled.png)
 
 > **AWS Budgets ($2 cost budget with actual + forecasted alerts):**
-> ![AWS Budget alerts](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/02-aws-budget-alerts.png)
+![AWS Budget alerts](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/02-aws-budget-alerts.png)
 
 > **AWS Cost Anomaly Detection (Active monitor and email subscription):**
-> ![Cost Anomaly Detection monitor](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/03-cost-anomaly-detection.png)
+![Cost Anomaly Detection monitor](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/03-cost-anomaly-detection.png)
 
 > **Billing Preferences (Alerts and CloudWatch billing metrics enabled):**
-> ![Billing preferences](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/04-billing-preferences.png)
+![Billing preferences](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/04-billing-preferences.png)
 
 > **Baseline billing dashboard ($0.00 USD at project start):**
-> ![Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)
+![Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)
 
-> **Support plan verification (Verified during account activation):**
-> [!Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)
+> **Support plan (Basic *Free* confirmed):**
+[!Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)
 
 ---
 
