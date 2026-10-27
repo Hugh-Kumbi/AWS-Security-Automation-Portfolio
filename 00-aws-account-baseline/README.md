@@ -30,34 +30,34 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 
 | Control | Status | Verification |
 |---------|--------|--------------|
-| Root User MFA                    | ✅ Enabled                                        | [Root MFA enabled](./screenshots/01-root-mfa-enabled.png)                     |
-| AWS Budgets                      | ✅ $2 budget; 80% actual + 100% forecasted alerts | [AWS Budget alerts](./screenshots/02-aws-budget-alerts.png)                   |
-| Cost Anomaly Detection           | ✅ Active monitor + email subscription            | [Cost Anomaly Detection monitor](./screenshots/03-cost-anomaly-detection.png) |
-| CloudWatch Billing Metrics       | ✅ Enabled                                        | [Billing preferences](./screenshots/04-billing-preferences.png)               |
-| Current Monthly Bill at Baseline | ✅ $0.00 USD                                      | [Billing dashboard](./screenshots/05-billing-dashboard-zero.png)              |
-| Support Plan                     | ✅ Basic (Free)                                   | [Support plan verification](Verified during account activation) reactivation                                          |
+| Root User MFA                    | ✅ Enabled                                        | [Root MFA enabled](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/01-root-mfa-enabled.png)                     |
+| AWS Budgets                      | ✅ $2 budget; 80% actual + 100% forecasted alerts | [AWS Budget alerts](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/02-aws-budget-alerts.png)                   |
+| Cost Anomaly Detection           | ✅ Active monitor + email subscription            | [Cost Anomaly Detection monitor](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/03-cost-anomaly-detection.png) |
+| CloudWatch Billing Metrics       | ✅ Enabled                                        | [Billing preferences](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/04-billing-preferences.png)               |
+| Current Monthly Bill at Baseline | ✅ $0.00 USD                                      | [Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)              |
+| Support Plan                     | ✅ Basic (Free)                                   | [Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png) reactivation                                          |
 
 ---
 
 ## Visual Verification
 
 **Root MFA enabled (IAM Dashboard green checkmark):**
-![Root MFA enabled](./screenshots/01-root-mfa-enabled.png)
+![Root MFA enabled](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/01-root-mfa-enabled.png)
 
 **AWS Budgets — $2 cost budget with actual + forecasted alerts:**
-![AWS Budget alerts](./screenshots/02-aws-budget-alerts.png)
+![AWS Budget alerts](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/02-aws-budget-alerts.png)
 
 **AWS Cost Anomaly Detection — active monitor and email subscription:**
-![Cost Anomaly Detection monitor](./screenshots/03-cost-anomaly-detection.png)
+![Cost Anomaly Detection monitor](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/03-cost-anomaly-detection.png)
 
 **Billing Preferences — alerts and CloudWatch billing metrics enabled:**
-![Billing preferences](./screenshots/04-billing-preferences.png)
+![Billing preferences](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/04-billing-preferences.png)
 
 **Baseline billing dashboard — $0.00 USD at project start:**
-![Billing dashboard](./screenshots/05-billing-dashboard-zero.png)
+![Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)
 
 **Support plan verification — Verified during account activation:**
-[Support plan verification](Verified during account activation)
+[!Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)
 
 ---
 
