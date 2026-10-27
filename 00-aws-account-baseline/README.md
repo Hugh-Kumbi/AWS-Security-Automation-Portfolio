@@ -15,12 +15,12 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 
 ### 1. Identity & Access Management (IAM) Hardening
 - **Root User MFA:** Configured a virtual Multi-Factor Authentication (MFA) token using Time-based One-Time Password (TOTP) rotation via an authenticator app. Root credentials are now isolated from daily operations in alignment with the AWS Well-Architected Security Pillar.
-- **Access Containment:** Established a policy of zero-use for root credentials; all future operational work will be performed through scoped IAM identities with least-privilege policies.
+- **Access Containment:** Established a policy of zero-use for root credentials. All future operational work will be performed through scoped IAM identities with least-privilege policies.
 
 ### 2. Proactive Cost & Financial Guardrails
-- **AWS Budgets:** Created a $2.00 USD cost budget with two alert thresholds — one at 80% of *actual* spend and one at 100% of *forecasted* spend. Forecasted alerts analyze real-time usage patterns to warn of projected overruns before charges are incurred.
+- **AWS Budgets:** Created a $2.00 USD cost budget with two alert thresholds, one at 80% of *actual* spend and one at 100% of *forecasted* spend. Forecasted alerts analyze real-time usage patterns to warn of projected overruns before charges are incurred.
 - **AWS Cost Anomaly Detection (CAD):** Enabled an ML-based monitor that establishes a normal daily spend baseline and flags anomalous spikes with email subscription notifications. Investigable via Amazon Q for plain-language root-cause explanations.
-- **CloudWatch Billing Alerts:** Permanently enabled the billing data pipeline in `us-east-1`, exposing financial metrics to Amazon CloudWatch for custom alarm creation. (Note: this preference is irreversible once enabled — it is free and enables fine-grained spend monitoring.)
+- **CloudWatch Billing Alerts:** Permanently enabled the billing data pipeline in `us-east-1`, exposing financial metrics to Amazon CloudWatch for custom alarm creation. This preference is irreversible once enabled, it is free and enables fine-grained spend monitoring.
 - **Billing Alerts:** Registered a primary email endpoint to receive automated notifications on billing activity.
 - **Pay-As-You-Go Awareness:** Confirmed the account operates on a paid plan (the 12-month Free Tier expired), establishing a discipline of terminating all lab resources immediately after each session.
 
@@ -41,23 +41,23 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 
 ## Visual Verification
 
-**Root MFA enabled (IAM Dashboard green checkmark):**
-![Root MFA enabled](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/01-root-mfa-enabled.png)
+> **Root MFA enabled (IAM Dashboard green checkmark):**
+> ![Root MFA enabled](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/01-root-mfa-enabled.png)
 
-**AWS Budgets — $2 cost budget with actual + forecasted alerts:**
-![AWS Budget alerts](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/02-aws-budget-alerts.png)
+> **AWS Budgets ($2 cost budget with actual + forecasted alerts):**
+> ![AWS Budget alerts](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/02-aws-budget-alerts.png)
 
-**AWS Cost Anomaly Detection — active monitor and email subscription:**
-![Cost Anomaly Detection monitor](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/03-cost-anomaly-detection.png)
+> **AWS Cost Anomaly Detection (Active monitor and email subscription):**
+> ![Cost Anomaly Detection monitor](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/03-cost-anomaly-detection.png)
 
-**Billing Preferences — alerts and CloudWatch billing metrics enabled:**
-![Billing preferences](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/04-billing-preferences.png)
+> **Billing Preferences (Alerts and CloudWatch billing metrics enabled):**
+> ![Billing preferences](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/04-billing-preferences.png)
 
-**Baseline billing dashboard — $0.00 USD at project start:**
-![Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)
+> **Baseline billing dashboard ($0.00 USD at project start):**
+> ![Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)
 
-**Support plan verification — Verified during account activation:**
-[!Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)
+> **Support plan verification (Verified during account activation):**
+> [!Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)
 
 ---
 
