@@ -29,13 +29,13 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 ## Validation Log
 
 | Control | Status | Verification |
-|---|---|---|
+|---------|--------|--------------|
 | Root User MFA                    | ✅ Enabled                                        | [Root MFA enabled](./screenshots/01-root-mfa-enabled.png)                     |
 | AWS Budgets                      | ✅ $2 budget; 80% actual + 100% forecasted alerts | [AWS Budget alerts](./screenshots/02-aws-budget-alerts.png)                   |
 | Cost Anomaly Detection           | ✅ Active monitor + email subscription            | [Cost Anomaly Detection monitor](./screenshots/03-cost-anomaly-detection.png) |
 | CloudWatch Billing Metrics       | ✅ Enabled                                        | [Billing preferences](./screenshots/04-billing-preferences.png)               |
 | Current Monthly Bill at Baseline | ✅ $0.00 USD                                      | [Billing dashboard](./screenshots/05-billing-dashboard-zero.png)              |
-| Support Plan                     | ✅ Basic (Free)                                   | Verified during account reactivation                                          |
+| Support Plan                     | ✅ Basic (Free)                                   | [Support plan verification](Verified during account activation) reactivation                                          |
 
 ---
 
@@ -56,14 +56,17 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 **Baseline billing dashboard — $0.00 USD at project start:**
 ![Billing dashboard](./screenshots/05-billing-dashboard-zero.png)
 
+**Support plan verification — Verified during account activation:**
+[Support plan verification](Verified during account activation)
+
 ---
 
 ## Architecture & Security Takeaways
 
-- **The Root Risk Profile:** Unlike Administrator IAM users governed by Role-Based Access Control (RBAC), the AWS Root account holds absolute, unrestrictable permissions — it is immune to IAM policy restrictions and is the only identity that can close the account, change support plans, or access certain billing details. Compromise of the root user leaves no fallback entity to evict an attacker. Restricting its daily use and enforcing MFA is a non-negotiable baseline control.
+- **The Root Risk Profile:** Unlike Administrator IAM users governed by Role-Based Access Control (RBAC), the AWS Root account holds absolute, unrestrictable permissions. It is immune to IAM policy restrictions and is the only identity that can close the account, change support plans, or access certain billing details. Compromise of the root user leaves no fallback entity to evict an attacker. Restricting its daily use and enforcing MFA is a non-negotiable baseline control.
 - **Auditability:** IAM user actions are logged in CloudTrail with unique ARNs, preserving individual accountability. Root actions are logged simply as `Root`, which is why operational work should always flow through IAM identities.
-- **Reactive vs. Forecasted Alerting:** Standard billing notifications are historical — they tell you what you already spent. Layering AWS Budgets (with forecasted-spend alerts) and Cost Anomaly Detection on top of basic alarms intercepts runaway costs *before* they become liabilities. In the cloud, cost anomalies are often the first signal of misconfiguration or compromise.
-- **Defense in Depth for Cost:** Three overlapping layers — Budgets (threshold-based), CAD (ML-based anomaly), and CloudWatch billing alarms (metric-based) — mean no single failure mode goes unnoticed.
+- **Reactive vs. Forecasted Alerting:** Standard billing notifications are historical, they tell you what you already spent. Layering AWS Budgets (with forecasted-spend alerts) and Cost Anomaly Detection on top of basic alarms intercepts runaway costs *before* they become liabilities. In the cloud, cost anomalies are often the first signal of misconfiguration or compromise.
+- **Defense in Depth for Cost:** Three overlapping layers, Budgets (threshold-based), CAD (ML-based anomaly), and CloudWatch billing alarms (metric-based). Which means that no single failure mode goes unnoticed.
 
 ---
 
@@ -75,4 +78,4 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 
 ## What's Next
 
-**Lab 01: IAM Least-Privilege Hardening** — designing scoped users, groups, and custom policies to enforce least privilege beyond the root account.
+**Lab 01: IAM Least-Privilege Hardening** - designing scoped users, groups, and custom policies to enforce least privilege beyond the root account.
