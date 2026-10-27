@@ -57,7 +57,7 @@ This sandbox serves as the secure, authenticated environment for all subsequent 
 ![Billing dashboard](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/05-billing-dashboard-zero.png)
 
 > **Support plan (Basic *Free* confirmed):**  
-[!Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)
+![Support plan verification](https://github.com/Hugh-Kumbi/AWS-Security-Automation-Portfolio/blob/main/00-aws-account-baseline/screenshots/06-support-plan.png)
 
 ---
 
