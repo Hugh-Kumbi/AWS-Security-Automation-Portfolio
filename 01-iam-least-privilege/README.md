@@ -1,10 +1,10 @@
 # 01. Cloud Security with AWS IAM: Least Privilege for a Dev/Prod Split
 
-> Restricted a new intern to the development EC2 environment only, using tag-based IAM policies, a user group, and a dedicated IAM user. Then proved the boundary works by testing it two ways: a live login and the IAM Policy Simulator.
+> Restricted a new intern to the development EC2 environment only, using tag-based IAM policies, a user group, and a dedicated IAM user. Then proved the boundary works by testing it two ways, i.e, a live login and the IAM Policy Simulator.
 
-**NextWork Pathway:** Cloud SecOps and Threat Monitoring | Week 1: Hardening the Baseline
-**Time taken:** about 1 hours 30 minutes
-**Region:** `US East (N. Virginia)`
+**NextWork Pathway:** Cloud SecOps and Threat Monitoring | Week 1: Hardening the Baseline  
+**Time taken:** about 1 hours 30 minutes  
+**Region:** `US East (N. Virginia)`  
 
 ---
 
@@ -47,11 +47,11 @@ flowchart LR
 | `nextwork-prod-hugh` | `Env = production`  |
 | `nextwork-dev-hugh`  | `Env = development` |
 
-Both used AMI `<AMI name>` and instance type `<instance type>`, with no key pair (not needed for console-only access in this lab). This was done on a pay-as-you-go account, so I chose a small, low-cost instance type and terminated both instances straight after testing.
+Both used AMI `Amazon Linux 2023 kernel-6.18 AMI` and instance type `t3.micro`, with no key pair (not needed for console-only access in this lab). This was done on a pay-as-you-go account, so I chose a small, low-cost instance type and terminated both instances straight after testing.
 
 ![Production instance tag](screenshots/06-prod-instance-env-tag.png)
 
-![Development instance tag](../screenshots/10-dev-instance-env-tag.png)
+![Development instance tag](screenshots/10-dev-instance-env-tag.png)
 
 ### 2. Created the IAM policy
 
@@ -67,9 +67,9 @@ Full file: [`policies/NextWorkDevEnvironmentPolicy.json`](policies/NextWorkDevEn
 
 **Why production is protected:** there is no Allow for production resources, so AWS's default implicit deny applies.
 
-![Policy JSON in the editor](screenshots/19-policy-json-pasted.png)
+![Policy JSON in the editor](screenshots/19-policy-json.png)
 
-![Policy details](../screenshots/23-policy-details.png)
+![Policy details](screenshots/23-policy-details.png)
 
 > Note: the policy description field rejected an apostrophe, so I removed it to create the policy.
 
@@ -79,7 +79,7 @@ Replaced the account-ID sign-in URL with a friendlier alias: `nextwork-alias-hug
 
 ![Account alias](screenshots/24-account-alias-popup.png)
 
-![Account alias creation success](../screenshots/25-account-alias-popup.png)
+![Account alias creation success](screenshots/25-account-alias-creation-success.png)
 
 ### 4. Created the group and user
 
@@ -88,11 +88,11 @@ Replaced the account-ID sign-in URL with a friendlier alias: `nextwork-alias-hug
 
 ![Group created](screenshots/27-user-group-success.png)
 
-![Created group summary](../screenshots/28-user-group-summary.png)
+![Created group summary](screenshots/28-user-group-summary.png)
 
-! [IAM user created](../screenshots/29-iam-user-create.png)
+! [IAM user created](screenshots/29-iam-user-create.png)
 
-![User signin details](../screenshots/32-user-signin-details.png)
+![User signin details](screenshots/32-user-signin-details.png)
 
 ---
 
@@ -124,7 +124,7 @@ Testing by stopping a real instance is disruptive in a real environment, so I re
 
 The simulator's "Show statement" view identified exactly which policy statement caused each decision.
 
-![Simulator results](../screenshots/41-simulator-results.png)
+![Simulator results](screenshots/41-simulator-results.png)
 
 ---
 
@@ -139,11 +139,10 @@ The simulator's "Show statement" view identified exactly which policy statement 
 What I would change for a production-grade setup:
 
 1. **Narrow `ec2:*`.** It allows far more than an intern needs (for example, terminating instances or modifying security groups). A tighter policy would list only `ec2:StartInstances`, `ec2:StopInstances`, and `ec2:RebootInstances`.
-2. **Require password reset and MFA.** I unchecked "must create a new password" only to keep the lab simple. Real users should be forced to reset and use MFA.
-3. **Prefer IAM Identity Center** over long-lived IAM users for people.
-4. **Use attribute-based access control (ABAC)** with principal tags so one policy scales across many teams and environments.
-5. **Add a permissions boundary** to cap the maximum permissions any policy can grant.
-6. **Audit with CloudTrail** to log every action the intern takes (built in Project 3).
+2. **Prefer IAM Identity Center** over long-lived IAM users for people.
+3. **Use attribute-based access control (ABAC)** with principal tags so one policy scales across many teams and environments.
+4. **Add a permissions boundary** to cap the maximum permissions any policy can grant.
+5. **Audit with CloudTrail** to log every action the intern takes (built in Project 3).
 
 ## Challenges and lessons learned
 
