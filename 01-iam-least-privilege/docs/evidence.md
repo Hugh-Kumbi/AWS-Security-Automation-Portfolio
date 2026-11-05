@@ -1,7 +1,5 @@
 # Evidence Index
 
-What each screenshot in [`../screenshots/`](../screenshots) demonstrates.
-
 ## Step 1: EC2 instances
 
 | Screenshot | What it shows |
