@@ -87,3 +87,4 @@ A hands-on portfolio demonstrating cloud security engineering across IAM hardeni
 ## 📌 Status
 
 Actively building — labs are added and committed incrementally as they are completed.
+# 02-guardduty-threat-detection
