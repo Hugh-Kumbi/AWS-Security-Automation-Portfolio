@@ -1,8 +1,9 @@
 # Incident Report: Instance Credential Exfiltration and S3 Data Access
 
-**Classification:** Lab exercise (OWASP Juice Shop, self-contained CloudFormation deployment). No production systems or real customer data were involved.
-**Severity:** High
-**Status:** Resolved. Environment deleted after investigation
+**Classification:** Lab exercise (OWASP Juice Shop, self-contained CloudFormation deployment). No production systems or real customer data were involved.  
+**Severity:** High  
+**Status:** Resolved. Environment deleted after investigation   
+**Evidence:** screenshots referenced below are indexed in [`evidence.md`](evidence.md)  
 
 ---
 
@@ -12,17 +13,17 @@ An attacker (performed by me, as part of this lab) exploited an SQL injection to
 
 ## 2. Timeline
 
-| Time (relative) | Event |
-|-----------------|-------|
-| T+0       | Attacker submits `' or 1=1;--` as the email on the login form and logs in as admin without valid credentials                                           |
-| T+2 min   | Attacker injects a JavaScript payload into the Username field                                                                                          |
-| T+2 min   | Web server executes the payload (command injection), queries the EC2 instance metadata service, and writes IAM credentials to a public path in the app |
-| T+3 min   | Attacker retrieves `credentials.json` directly over HTTP                                                                                               |
-| T+5 min   | Attacker opens AWS CloudShell, configures a CLI profile (`stolen`) using the retrieved credentials                                                     |
-| T+6 min   | Attacker runs `aws s3 cp` to copy `secret-information.txt` from the target S3 bucket                                                                   |
-| T+6 min   | Attacker reads the file, confirming data exposure                                                                                                      |
-| T+~20 min | GuardDuty generates finding `UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.InsideAWS` (High severity)                                      |
-| T+21 min  | Defender (me) reviews the finding in the GuardDuty console                                                                                             |
+| Time (relative) | Event | Evidence |
+|-----------------|-------|----------|
+| T+0       | Attacker submits `' or 1=1;--` as the email on the login form and logs in as admin without valid credentials                                           | [`12-sql-injection-login-field.png`](../screenshots/12-sql-injection-login-field.png), [`13-sql-injection-success-banner.png`](../screenshots/13-sql-injection-success-banner.png) |
+| T+2 min   | Attacker accesses admin profile page to inject a JavaScript payload into the Username field                                                            | [`14-admin-profile-page.png`](../screenshots/14-admin-profile-page.png) |
+| T+2 min   | Web server executes the payload (command injection), queries the EC2 instance metadata service, and writes IAM credentials to a public path in the app | [`15-command-injection-object-object.png`](../screenshots/15-command-injection-object-object.png) |
+| T+3 min   | Attacker retrieves `credentials.json` directly over HTTP                                                                                               | [`16-stolen-credentials-json.png`](../screenshots/16-stolen-credentials-json.png) |
+| T+5 min   | Attacker opens AWS CloudShell, configures a CLI profile (`stolen`) using the retrieved credentials                                                     | [`17-cloudshell-first-open.png`](../screenshots/17-cloudshell-first-open.png), [`18-cloudshell-env-vars.png`](../screenshots/18-cloudshell-env-vars.png), [`19-cloudshell-wget-credentials.png`](../screenshots/19-cloudshell-wget-credentials.png), [`20-cloudshell-cat-jq-credentials.png`](../screenshots/20-cloudshell-cat-jq-credentials.png), [`21-cloudshell-aws-configure-profile.png`](../screenshots/21-cloudshell-aws-configure-profile.png) |
+| T+6 min   | Attacker runs `aws s3 cp` to copy `secret-information.txt` from the target S3 bucket                                                                   | [`22-cloudshell-s3-cp-secret-file.png`](../screenshots/22-cloudshell-s3-cp-secret-file.png) |
+| T+6 min   | Attacker reads the file, confirming data exposure                                                                                                      | [`23-cloudshell-secret-file-contents.png`](../screenshots/23-cloudshell-secret-file-contents.png) |
+| T+~20 min | GuardDuty generates finding `UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.InsideAWS` (High severity)                                      | [`24-guardduty-findings-list.png`](../screenshots/24-guardduty-findings-list.png) |
+| T+21 min  | Defender (me) reviews the finding in the GuardDuty console                                                                                             | [`25-guardduty-finding-detail.png`](../screenshots/25-guardduty-finding-detail.png) |
 
 ## 3. Root cause
 
@@ -55,7 +56,14 @@ GuardDuty's anomaly detection identified that credentials issued to an EC2 insta
 1. Confirmed the finding details and the affected resource in the GuardDuty console
 2. Treated the exposed credentials as compromised (they were temporary and tied to a lab resource that was deleted)
 3. Deleted the CloudFormation stack, which removed the EC2 instance, its IAM role, the S3 bucket, and associated networking
-4. Removed locally cached copies of the stolen credentials and the exfiltrated file from CloudShell and local storage
+
+![CloudFormation stack deletion](../screenshots/29-cleanup-stack-delete.png)
+
+![Auto-created template bucket emptied and deleted](../screenshots/30-cleanup-s3-template-bucket.png)
+
+4. Removed locally cached copies of the stolen credentials and the exfiltrated file from CloudShell and local storage 
+
+![CloudShell with stolen credentials and secret file removed](../screenshots/31-cleanup-cloudshell-files-removed.png)
 
 ## 7. Recommendations
 

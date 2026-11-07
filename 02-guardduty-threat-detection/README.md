@@ -2,9 +2,9 @@
 
 > Played both attacker and defender against a deliberately vulnerable web app: chained an SQL injection, a command injection, and AWS credential theft into a real data breach, then verified that GuardDuty detected the intrusion and that S3 Malware Protection caught a planted test file.
 
-**Pathway:** NextWork, Cloud SecOps and Threat Monitoring | Weeks 2-3: Active Threat Monitoring
-**Time taken:** about 2 hours (plus troubleshooting time on deployment)
-**Region:** `us-west-2` (Oregon) — see [Deployment troubleshooting](#deployment-troubleshooting)
+**Pathway:** NextWork, Cloud SecOps and Threat Monitoring | Weeks 2-3: Active Threat Monitoring  
+**Time taken:** about 2 hours (plus troubleshooting time on deployment)  
+**Region:** `us-west-2` (Oregon) — see [Deployment troubleshooting](#deployment-troubleshooting)  
 **Billing:** Pay-as-you-go account, no free tier. All resources deleted after testing. GuardDuty and Malware Protection were only enabled for the duration of this lab.
 
 ---
@@ -57,6 +57,12 @@ flowchart TD
 | GuardDuty Malware Protection for S3 | Scans uploaded objects for malware                                     |
 | CloudShell                          | Used (as the attacker) to run AWS CLI commands with stolen credentials |
 
+![Osaka deployment template validation failure](screenshots/06-osaka-region-mapping-error.png)
+
+![Stack stuck in ROLLBACK_FAILED](screenshots/07-stack-rollback-failed-error.png)
+
+![Deleting the failed stack with the secure bucket set to Retain](screenshots/08-stack-delete-retain-bucket.png)
+
 ---
 
 ## Deployment troubleshooting
@@ -72,6 +78,20 @@ The CloudFormation deployment failed twice before succeeding, and diagnosing it 
 **What I changed for the next attempt:** under Stack failure options, I set *Rollback on failure* to **Deactivated** (while leaving *Delete newly created resources during a rollback* **Activated**). This step was essential because the default behavior deletes all evidence the moment something fails, which is exactly wrong for troubleshooting. If the Auto Scaling Group failed again, the stack would pause instead of tearing itself down, letting me check the Auto Scaling Group's **Activity** tab and the instance's system log for the real error.
 
 The stack deployed successfully on the retry in `us-west-2`.
+
+![Stack setup: new resources, standard](screenshots/01-stack-create-start.png)
+
+![Template uploaded](screenshots/02-template-upload.png)
+
+![Stack name and details](screenshots/03-stack-name-details.png)
+
+![Stack failure options configured](screenshots/04-stack-failure-options.png)
+
+![Review page with IAM acknowledgement checked](screenshots/05-stack-review-iam-ack.png)
+
+![Stack status CREATE_COMPLETE](screenshots/09-stack-create-complete.png)
+
+![Outputs tab with JuiceShopURL and TheSecureBucket](screenshots/10-outputs-tab.png)
 
 **Why this is worth documenting:** in a real environment, a stuck rollback caused by a resource an app has already written to is a common and confusing failure mode. Knowing to retain the specific resource, clean it up manually, and then disable rollback to capture root cause (instead of just retrying blindly) is a practical incident-response skill, not just a lab exercise.
 
@@ -91,6 +111,32 @@ The stack deployed successfully on the retry in `us-west-2`.
 | 8 | Configured a new AWS CLI profile, `stolen` | `aws configure set profile.stolen...` using the parsed values | Gave CloudShell the ability to act as the compromised EC2 instance |
 | 9 | Stole the data                             | `aws s3 cp s3://.../secret-information.txt . --profile stolen` | Copied the target's sensitive file using the stolen identity |
 | 10 | Confirmed the breach                      | `cat secret-information.txt` | Read the file's contents and found a confirmation string proving the data had leaked |
+
+![Juice Shop landing page](screenshots/11-juiceshop-landing-page.png)
+
+![SQL injection string entered in the login email field](screenshots/12-sql-injection-login-field.png)
+
+![Login Admin challenge solved banner](screenshots/13-sql-injection-success-banner.png)
+
+![Admin profile page](screenshots/14-admin-profile-page.png)
+
+![Username showing object Object after the payload ran](screenshots/15-command-injection-object-object.png)
+
+![Exposed credentials.json contents in the browser](screenshots/16-stolen-credentials-json.png)
+
+![CloudShell terminal opened](screenshots/17-cloudshell-first-open.png)
+
+![Environment variables set for the Juice Shop URL and S3 bucket](screenshots/18-cloudshell-env-vars.png)
+
+![wget downloading the stolen credentials.json](screenshots/19-cloudshell-wget-credentials.png)
+
+![Formatted credentials via cat and jq](screenshots/20-cloudshell-cat-jq-credentials.png)
+
+![AWS CLI profile 'stolen' configured from the credentials](screenshots/21-cloudshell-aws-configure-profile.png)
+
+![aws s3 cp copying the secret file with the stolen profile](screenshots/22-cloudshell-s3-cp-secret-file.png)
+
+![Contents of secret-information.txt, confirming the data leak](screenshots/23-cloudshell-secret-file-contents.png)
 
 **Why SQL injection and command injection are different:** SQL injection manipulates a database query (tricking the login check into returning true). Command injection gets the server to execute arbitrary operating-system-level commands. The first undermined authentication; the second gave direct code execution, which is what made stealing IAM credentials possible.
 
@@ -117,6 +163,10 @@ GuardDuty generated a finding within about 15 minutes of the CloudShell activity
 | Resource affected | The IAM role attached to the EC2 instance, used to access the S3 bucket |
 | Action            | `GetObject` on the secret file                                          |
 | Actor             | IP address and approximate location of the CloudShell session           |
+
+![GuardDuty findings list showing the High-severity finding](screenshots/24-guardduty-findings-list.png)
+
+![Finding detail page with resource, action, and actor](screenshots/25-guardduty-finding-detail.png)
 
 A full incident write-up, in SOC report format, is in [`docs/incident-report.md`](docs/incident-report.md).
 
@@ -150,6 +200,12 @@ To go beyond the core project, I enabled [Malware Protection for S3](https://doc
 | Uploaded `EICAR-test-file.txt`                                                            | Upload succeeded     |
 | Checked GuardDuty findings                                                                | New finding: **`Object:S3/MaliciousFile`**, correctly identified as the EICAR test signature, not a real virus |
 
+![Malware Protection for S3 enabled](screenshots/26-malware-protection-enabled.png)
+
+![EICAR test file uploaded](screenshots/27-eicar-file-upload.png)
+
+![Object:S3/MaliciousFile finding for the EICAR file](screenshots/28-eicar-finding.png)
+
 This confirms GuardDuty's S3 malware scanning works end to end. An upload triggers a scan, and a detected signature produces a finding, separate from the network/API-based findings covered earlier.
 
 ---
@@ -177,7 +233,16 @@ What this lab demonstrates about defending against this exact chain:
 - Emptied and deleted the auto-created `cf-templates-...` bucket and the stack's secure bucket
 - Removed `credentials.json` and `secret-information.txt` from CloudShell
 - Deleted the downloaded CloudFormation template and EICAR test file from local storage
-- Confirmed GuardDuty and Malware Protection stopped incurring charges once the stack was gone
+- Confirmed GuardDuty and Malware Protection stopped incurring charges once the stack was gone  
+
+![CloudFormation stack deletion](screenshots/29-cleanup-stack-delete.png)
+
+![Auto-created template bucket emptied and deleted](screenshots/30-cleanup-s3-template-bucket.png)
+
+![CloudShell with stolen credentials and secret file removed](screenshots/31-cleanup-cloudshell-files-removed.png)
+
+A full list of what each screenshot proves is in [`docs/evidence.md`](docs/evidence.md).
+
 
 ## Skills demonstrated
 
