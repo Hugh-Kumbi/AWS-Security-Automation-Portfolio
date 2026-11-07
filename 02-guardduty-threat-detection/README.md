@@ -4,7 +4,7 @@
 
 **Pathway:** NextWork, Cloud SecOps and Threat Monitoring | Weeks 2-3: Active Threat Monitoring  
 **Time taken:** about 2 hours (plus troubleshooting time on deployment)  
-**Region:** `us-west-2` (Oregon) — see [Deployment troubleshooting](#deployment-troubleshooting)  
+**Region:** `us-west-2` (Oregon), see [Deployment troubleshooting](#deployment-troubleshooting)  
 **Billing:** Pay-as-you-go account, no free tier. All resources deleted after testing. GuardDuty and Malware Protection were only enabled for the duration of this lab.
 
 ---
